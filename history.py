@@ -15,8 +15,9 @@ def load_history() -> list:
 
 def save_match(result: dict):
     history = load_history()
+    next_id = max((entry["id"] for entry in history), default=0) + 1
     history.append({
-        "id": len(history) + 1,
+        "id": next_id,
         "date": datetime.now().strftime("%Y-%m-%d"),
         "company": result.get("company"),
         "role": result.get("role"),
