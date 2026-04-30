@@ -11,7 +11,7 @@ console = Console()
 
 def cmd_match(args):
     if args.file:
-        with open(args.file, "r") as f:
+        with open(args.file, "r", encoding="utf-8") as f:
             jd = f.read()
     elif args.input and args.input.startswith("http"):
         console.print("[dim]Fetching job listing...[/dim]")
