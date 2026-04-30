@@ -99,15 +99,14 @@ python main.py view 3
 ```
 
 ## Project structure
-job-match/
-├── main.py          # CLI entry point and arg parsing
-├── matcher.py       # Claude API call and response parsing
-├── history.py       # Read/write match history to JSON
-├── fetcher.py       # URL fetching with trafilatura
-├── resume.py        # Your resume as a plain text constant
-├── history.json     # Auto-generated on first run
-├── .env             # API key (not committed)
-└── requirements.txt
+job-match/main.py           CLI entry point and arg parsing
+job-match/matcher.py        Claude API call and response parsing
+job-match/history.py        Read/write match history to JSON
+job-match/fetcher.py        URL fetching with trafilatura
+job-match/resume.py         Your resume as a plain text constant
+job-match/history.json      Auto-generated on first run
+job-match/.env              API key (not committed)
+job-match/requirements.txt
 
 ### Author
 Erik Mendoza — mendoza.erik2903@gmail.com
