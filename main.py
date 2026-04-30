@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from rich.console import Console
 from rich.table import Table
 from matcher import match
-from history import save_match, load_history, get_by_id
+from history import save_match, load_history, get_by_id, delete_by_id
 from fetcher import fetch_url
 
 load_dotenv()
@@ -67,9 +67,27 @@ def cmd_view(args):
     result = entry["full_result"]
     console.print(f"\n[bold]{result['role']} at {result['company']}[/bold]")
     console.print(f"Fit Score: [green]{result['fit_score']}/100[/green]\n")
+
+    console.print("[bold]Matched Skills:[/bold]")
+    for s in result["matched_skills"]:
+        console.print(f"  ✓ {s}")
+
+    console.print("\n[bold]Missing Skills:[/bold]")
+    for s in result["missing_skills"]:
+        console.print(f"  ✗ {s}")
+
+    console.print("\n[bold]Talking Points:[/bold]")
     for t in result["talking_points"]:
         console.print(f"  → {t}")
+
     console.print(f"\n[italic]{result['summary']}[/italic]")
+
+def cmd_delete(args):
+    success = delete_by_id(args.id)
+    if success:
+        console.print(f"[green]Deleted match ID {args.id}[/green]")
+    else:
+        console.print(f"[red]No match found with ID {args.id}[/red]")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="job-match")
@@ -86,6 +104,10 @@ if __name__ == "__main__":
     p_view = subparsers.add_parser("view")
     p_view.add_argument("id", type=int)
     p_view.set_defaults(func=cmd_view)
+
+    p_delete = subparsers.add_parser("delete")
+    p_delete.add_argument("id", type=int)
+    p_delete.set_defaults(func=cmd_delete)
 
     args = parser.parse_args()
     if hasattr(args, "func"):

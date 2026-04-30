@@ -32,3 +32,12 @@ def get_by_id(id: int) -> dict | None:
         if entry["id"] == id:
             return entry
     return None
+
+def delete_by_id(id: int) -> bool:
+    history = load_history()
+    new_history = [entry for entry in history if entry["id"] != id]
+    if len(new_history) == len(history):
+        return False
+    with open(HISTORY_FILE, "w") as f:
+        json.dump(new_history, f, indent=2)
+    return True

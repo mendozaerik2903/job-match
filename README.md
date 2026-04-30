@@ -98,15 +98,20 @@ View a specific past match
 python main.py view 3
 ```
 
+Delete a specific past match
+``` bash
+python main.py delete 3
+```
+
 ## Project structure
-job-match/main.py           CLI entry point and arg parsing
-job-match/matcher.py        Claude API call and response parsing
-job-match/history.py        Read/write match history to JSON
-job-match/fetcher.py        URL fetching with trafilatura
-job-match/resume.py         Your resume as a plain text constant
-job-match/history.json      Auto-generated on first run
-job-match/.env              API key (not committed)
-job-match/requirements.txt
+- main.py — CLI entry point and arg parsing. Match determines how the job description is inputted and passed to the matcher.
+- matcher.py — Claude API call and response parsing. Match calls Anthropic client with a predefined prompt and receives the job description input and user's resume from resume.py.
+- history.py — Read/write match history to JSON
+- fetcher.py — URL fetching with trafilatura
+- resume.py — Your resume as a plain text constant
+- history.json — Auto-generated on first run
+- .env — API key (not committed)
+- requirements.txt
 
 ### Author
 Erik Mendoza — mendoza.erik2903@gmail.com
